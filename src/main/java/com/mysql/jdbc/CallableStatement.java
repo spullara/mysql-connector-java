@@ -32,11 +32,13 @@ import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Date;
+import java.sql.NClob;
 import java.sql.ParameterMetaData;
 import java.sql.Ref;
 import java.sql.ResultSet;
+import java.sql.RowId;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.SQLXML;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.sql.Types;
@@ -1846,7 +1848,27 @@ public class CallableStatement extends PreparedStatement implements
 		return retValue;
 	}
 
-	protected synchronized int mapOutputParameterIndexToRsIndex(int paramIndex)
+  @Override
+  public RowId getRowId(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public RowId getRowId(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setRowId(String s, RowId rowId) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNString(String s, String s1) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  protected synchronized int mapOutputParameterIndexToRsIndex(int paramIndex)
 			throws SQLException {
 
 		if (this.returnValueParam != null && paramIndex == 1) {
@@ -2392,12 +2414,77 @@ public class CallableStatement extends PreparedStatement implements
 		
 	}
 
-	public void setBlob(String parameterName, InputStream inputStream, long length) throws SQLException {
+  @Override
+  public void setNClob(String s, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public void setBlob(String parameterName, InputStream inputStream, long length) throws SQLException {
 		setBlob(getNamedParamIndex(parameterName, false), inputStream, length);
 		
 	}
 
-	public void setCharacterStream(String parameterName, Reader reader) throws SQLException {
+  @Override
+  public void setNClob(String s, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob getNClob(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob getNClob(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setSQLXML(String s, SQLXML sqlxml) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML getSQLXML(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML getSQLXML(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getNString(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getNString(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getNCharacterStream(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getNCharacterStream(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getCharacterStream(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getCharacterStream(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public void setCharacterStream(String parameterName, Reader reader) throws SQLException {
 		setCharacterStream(getNamedParamIndex(parameterName, false), reader);
 		
 	}
@@ -2431,8 +2518,13 @@ public class CallableStatement extends PreparedStatement implements
 		setNCharacterStream(getNamedParamIndex(parameterName, false), value, length);
 		
 	}
-	
-	/**
+
+  @Override
+  public void setNClob(String s, NClob nClob) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /**
 	 * Check whether the stored procedure alters any data or is safe for read-only usage.
 	 * 
 	 * @return true if procedure does not alter data

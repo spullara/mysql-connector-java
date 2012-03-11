@@ -22,24 +22,31 @@
  */
 package com.mysql.jdbc;
 
+import com.mysql.jdbc.log.Log;
+import com.mysql.jdbc.log.LogFactory;
+import com.mysql.jdbc.log.NullLogger;
+import com.mysql.jdbc.profiler.ProfilerEvent;
+import com.mysql.jdbc.profiler.ProfilerEventHandler;
+import com.mysql.jdbc.util.LRUCache;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
-import java.sql.Blob;
 import java.sql.DatabaseMetaData;
+import java.sql.NClob;
 import java.sql.ResultSet;
+import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
+import java.sql.SQLXML;
 import java.sql.Savepoint;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -55,13 +62,6 @@ import java.util.Stack;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TreeMap;
-
-import com.mysql.jdbc.log.Log;
-import com.mysql.jdbc.log.LogFactory;
-import com.mysql.jdbc.log.NullLogger;
-import com.mysql.jdbc.profiler.ProfilerEvent;
-import com.mysql.jdbc.profiler.ProfilerEventHandler;
-import com.mysql.jdbc.util.LRUCache;
 
 /**
  * A Connection represents a session with a specific database. Within the
@@ -105,9 +105,19 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements
    public MySQLConnection getLoadBalanceSafeProxy() {
 	   return this.getProxy();
    }
-   
 
-	class ExceptionInterceptorChain implements ExceptionInterceptor {
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+
+  class ExceptionInterceptorChain implements ExceptionInterceptor {
 		List interceptors;
 		
 		ExceptionInterceptorChain(String interceptorClasses) throws SQLException {
@@ -4301,7 +4311,62 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements
 		return pStmt;
 	}
 
-	/**
+  @Override
+  public java.sql.Clob createClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public java.sql.Blob createBlob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob createNClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML createSQLXML() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isValid(int i) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(String s, String s1) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(Properties properties) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getClientInfo(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Properties getClientInfo() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public java.sql.Array createArrayOf(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Struct createStruct(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /**
 	 * Closes connection and frees resources.
 	 * 
 	 * @param calledExplicitly

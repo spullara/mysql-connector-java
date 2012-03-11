@@ -22,21 +22,27 @@
  */
 package com.mysql.jdbc;
 
+import com.mysql.jdbc.log.Log;
+
+import java.sql.Array;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.DatabaseMetaData;
+import java.sql.NClob;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
+import java.sql.SQLXML;
 import java.sql.Savepoint;
-import java.sql.Statement;
+import java.sql.Struct;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
 import java.util.Timer;
-
-import com.mysql.jdbc.log.Log;
 
 public class LoadBalancedMySQLConnection implements MySQLConnection {
 
@@ -2179,7 +2185,62 @@ public class LoadBalancedMySQLConnection implements MySQLConnection {
 				autoGenKeyColNames);
 	}
 
-	public PreparedStatement prepareStatement(String sql) throws SQLException {
+  @Override
+  public java.sql.Clob createClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Blob createBlob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob createNClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML createSQLXML() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isValid(int i) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(String s, String s1) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(Properties properties) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getClientInfo(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Properties getClientInfo() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Array createArrayOf(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Struct createStruct(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public PreparedStatement prepareStatement(String sql) throws SQLException {
 
 		return getActiveMySQLConnection().prepareStatement(sql);
 	}
@@ -2531,4 +2592,14 @@ public class LoadBalancedMySQLConnection implements MySQLConnection {
 	public synchronized boolean isServerLocal() throws SQLException {
 		return getActiveMySQLConnection().isServerLocal();
 	}
+
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 }

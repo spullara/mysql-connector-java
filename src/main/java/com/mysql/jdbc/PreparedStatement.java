@@ -22,6 +22,10 @@
  */
 package com.mysql.jdbc;
 
+import com.mysql.jdbc.exceptions.MySQLStatementCancelledException;
+import com.mysql.jdbc.exceptions.MySQLTimeoutException;
+import com.mysql.jdbc.profiler.ProfilerEvent;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -42,10 +46,12 @@ import java.sql.Array;
 import java.sql.Clob;
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
+import java.sql.NClob;
 import java.sql.ParameterMetaData;
 import java.sql.Ref;
-import java.sql.ResultSet;
+import java.sql.RowId;
 import java.sql.SQLException;
+import java.sql.SQLXML;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.sql.Types;
@@ -58,12 +64,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import com.mysql.jdbc.exceptions.DeadlockTimeoutRollbackMarker;
-import com.mysql.jdbc.exceptions.MySQLStatementCancelledException;
-import com.mysql.jdbc.exceptions.MySQLTimeoutException;
-import com.mysql.jdbc.exceptions.MySQLTransactionRollbackException;
-import com.mysql.jdbc.profiler.ProfilerEvent;
 
 /**
  * A SQL Statement is pre-compiled and stored in a PreparedStatement object.
@@ -2966,7 +2966,12 @@ public class PreparedStatement extends com.mysql.jdbc.StatementImpl implements
 	return this.parameterMetaData;
 }
 
-	ParseInfo getParseInfo() {
+  @Override
+  public void setRowId(int i, RowId rowId) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  ParseInfo getParseInfo() {
 		return this.parseInfo;
 	}
 
@@ -5423,8 +5428,13 @@ public class PreparedStatement extends com.mysql.jdbc.StatementImpl implements
 	                SQLError.SQL_STATE_GENERAL_ERROR, getExceptionInterceptor());
 	    }
 	}
-	
-	public void setNClob(int parameterIndex, Reader reader) throws SQLException {
+
+  @Override
+  public void setNClob(int i, NClob nClob) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public void setNClob(int parameterIndex, Reader reader) throws SQLException {
 		setNCharacterStream(parameterIndex, reader);		
 	}
 
@@ -5449,8 +5459,13 @@ public class PreparedStatement extends com.mysql.jdbc.StatementImpl implements
 	        setNCharacterStream(parameterIndex, reader, length);
 	    }
 	}
-	
-	public synchronized ParameterBindings getParameterBindings() throws SQLException {
+
+  @Override
+  public void setSQLXML(int i, SQLXML sqlxml) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public synchronized ParameterBindings getParameterBindings() throws SQLException {
 		return new EmulatedPreparedStatementBindings();
 	}
 	

@@ -25,20 +25,19 @@
  */
 package com.mysql.jdbc.jdbc2.optional;
 
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.Properties;
+import com.mysql.jdbc.ConnectionPropertiesImpl;
+import com.mysql.jdbc.NonRegisteringDriver;
 
 import javax.naming.NamingException;
 import javax.naming.Reference;
 import javax.naming.Referenceable;
 import javax.naming.StringRefAddr;
 import javax.sql.DataSource;
-
-import com.mysql.jdbc.ConnectionPropertiesImpl;
-import com.mysql.jdbc.NonRegisteringDriver;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.Properties;
 
 /**
  * A JNDI DataSource for a Mysql JDBC connection
@@ -447,4 +446,14 @@ public class MysqlDataSource extends ConnectionPropertiesImpl implements
 //	public <T> T unwrap(Class<T> iface) throws SQLException {
 //		throw SQLError.notImplemented();
 //	}
+
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 }

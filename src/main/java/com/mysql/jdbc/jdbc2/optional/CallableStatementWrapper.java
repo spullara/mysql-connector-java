@@ -35,8 +35,11 @@ import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.Date;
+import java.sql.NClob;
 import java.sql.Ref;
+import java.sql.RowId;
 import java.sql.SQLException;
+import java.sql.SQLXML;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -1801,6 +1804,166 @@ private static final Constructor JDBC_4_CALLABLE_STATEMENT_WRAPPER_CTOR;
 
 		return null;
 	}
+
+  @Override
+  public RowId getRowId(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public RowId getRowId(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setRowId(String s, RowId rowId) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNString(String s, String s1) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNCharacterStream(String s, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNClob(String s, NClob nClob) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClob(String s, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBlob(String s, InputStream inputStream, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNClob(String s, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob getNClob(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob getNClob(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setSQLXML(String s, SQLXML sqlxml) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML getSQLXML(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML getSQLXML(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getNString(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getNString(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getNCharacterStream(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getNCharacterStream(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getCharacterStream(int i) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Reader getCharacterStream(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBlob(String s, Blob blob) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClob(String s, Clob clob) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setAsciiStream(String s, InputStream inputStream, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBinaryStream(String s, InputStream inputStream, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setCharacterStream(String s, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setAsciiStream(String s, InputStream inputStream) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBinaryStream(String s, InputStream inputStream) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setCharacterStream(String s, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNCharacterStream(String s, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClob(String s, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBlob(String s, InputStream inputStream) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNClob(String s, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
 //
 //	public Reader getCharacterStream(int parameterIndex) throws SQLException {
 //		try {

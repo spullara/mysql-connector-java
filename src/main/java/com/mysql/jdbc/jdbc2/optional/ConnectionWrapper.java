@@ -25,14 +25,6 @@
  */
 package com.mysql.jdbc.jdbc2.optional;
 
-import java.lang.reflect.Constructor;
-import java.sql.SQLException;
-import java.sql.Savepoint;
-import java.sql.Statement;
-import java.util.Map;
-import java.util.Properties;
-import java.util.TimeZone;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ExceptionInterceptor;
 import com.mysql.jdbc.Extension;
@@ -41,6 +33,21 @@ import com.mysql.jdbc.MysqlErrorNumbers;
 import com.mysql.jdbc.SQLError;
 import com.mysql.jdbc.Util;
 import com.mysql.jdbc.log.Log;
+
+import java.lang.reflect.Constructor;
+import java.sql.Array;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.NClob;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
+import java.sql.SQLXML;
+import java.sql.Savepoint;
+import java.sql.Statement;
+import java.sql.Struct;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TimeZone;
 
 /**
  * This class serves as a wrapper for the org.gjt.mm.mysql.jdbc2.Connection
@@ -759,7 +766,62 @@ public class ConnectionWrapper extends WrapperBase implements Connection {
 		return null; // we don't reach this code, compiler can't tell
 	}
 
-	/**
+  @Override
+  public Clob createClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Blob createBlob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob createNClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML createSQLXML() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isValid(int i) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(String s, String s1) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(Properties properties) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getClientInfo(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Properties getClientInfo() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Array createArrayOf(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Struct createStruct(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /**
 	 * @see Connection#releaseSavepoint(Savepoint)
 	 */
 	public void releaseSavepoint(Savepoint arg0) throws SQLException {
@@ -2755,4 +2817,14 @@ public class ConnectionWrapper extends WrapperBase implements Connection {
 	public boolean isServerLocal() throws SQLException {
 		return this.mc.isServerLocal();
 	}
+
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 }

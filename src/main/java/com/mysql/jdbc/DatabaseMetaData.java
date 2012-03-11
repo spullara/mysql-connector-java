@@ -27,6 +27,7 @@ package com.mysql.jdbc;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.sql.ResultSet;
+import java.sql.RowIdLifetime;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
@@ -63,7 +64,17 @@ import java.util.TreeMap;
  */
 public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 
-	protected abstract class IteratorWithCleanup {
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  protected abstract class IteratorWithCleanup {
 		abstract void close() throws SQLException;
 
 		abstract boolean hasNext() throws SQLException;
@@ -8044,7 +8055,12 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 		return false;
 	}
 
-	/**
+  @Override
+  public RowIdLifetime getRowIdLifetime() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /**
 	 * Are stored procedure calls using the stored procedure escape syntax
 	 * supported?
 	 * 
@@ -8274,8 +8290,23 @@ public class DatabaseMetaData implements java.sql.DatabaseMetaData {
 	public boolean supportsStoredFunctionsUsingCallSyntax() throws SQLException {
 		return true;
 	}
-	
-	/**
+
+  @Override
+  public boolean autoCommitFailureClosesAllResultSets() throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public ResultSet getClientInfoProperties() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public ResultSet getFunctions(String s, String s1, String s2) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /**
 	 * Get a prepared statement to query information_schema tables.
 	 * 
 	 * @return PreparedStatement

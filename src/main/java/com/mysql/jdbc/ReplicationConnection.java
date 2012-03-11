@@ -21,18 +21,23 @@
  */
 package com.mysql.jdbc;
 
+import com.mysql.jdbc.log.Log;
+
+import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.DatabaseMetaData;
+import java.sql.NClob;
 import java.sql.PreparedStatement;
+import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
+import java.sql.SQLXML;
 import java.sql.Savepoint;
 import java.sql.Statement;
+import java.sql.Struct;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
-
-import com.mysql.jdbc.log.Log;
 
 /**
  * Connection that opens two connections, one two a replication master, and
@@ -402,11 +407,66 @@ public class ReplicationConnection implements Connection, PingTarget {
 		return pstmt;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.sql.Connection#releaseSavepoint(java.sql.Savepoint)
-	 */
+  @Override
+  public java.sql.Clob createClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Blob createBlob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public NClob createNClob() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public SQLXML createSQLXML() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isValid(int i) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(String s, String s1) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClientInfo(Properties properties) throws SQLClientInfoException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public String getClientInfo(String s) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Properties getClientInfo() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Array createArrayOf(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public Struct createStruct(String s, Object[] objects) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /*
+    * (non-Javadoc)
+    *
+    * @see java.sql.Connection#releaseSavepoint(java.sql.Savepoint)
+    */
 	public synchronized void releaseSavepoint(Savepoint savepoint)
 			throws SQLException {
 		this.currentConnection.releaseSavepoint(savepoint);
@@ -2558,4 +2618,14 @@ public class ReplicationConnection implements Connection, PingTarget {
 	public synchronized boolean isServerLocal() throws SQLException {
 		return this.currentConnection.isServerLocal();
 	}
+
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 }

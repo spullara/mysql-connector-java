@@ -25,15 +25,15 @@
  */
 package com.mysql.jdbc.jdbc2.optional;
 
+import com.mysql.jdbc.SQLError;
+import com.mysql.jdbc.Util;
+
 import java.lang.reflect.Constructor;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
 import java.sql.Statement;
-
-import com.mysql.jdbc.SQLError;
-import com.mysql.jdbc.Util;
 
 /**
  * Wraps statements so that errors can be reported correctly to
@@ -478,11 +478,26 @@ public class StatementWrapper extends WrapperBase implements Statement {
 		return Statement.CLOSE_CURRENT_RESULT;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.sql.Statement#getResultSetType()
-	 */
+  @Override
+  public boolean isClosed() throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setPoolable(boolean b) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isPoolable() throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /*
+    * (non-Javadoc)
+    *
+    * @see java.sql.Statement#getResultSetType()
+    */
 	public int getResultSetType() throws SQLException {
 		try {
 			if (this.wrappedStmt != null) {
@@ -866,4 +881,14 @@ public class StatementWrapper extends WrapperBase implements Statement {
 			checkAndFireConnectionError(sqlEx);
 		}
 	}
+
+  @Override
+  public <T> T unwrap(Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
 }

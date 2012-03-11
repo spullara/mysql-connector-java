@@ -24,21 +24,20 @@
 
 package com.mysql.jdbc.jdbc2.optional;
 
+import com.mysql.jdbc.ExceptionInterceptor;
+import com.mysql.jdbc.SQLError;
+import com.mysql.jdbc.Util;
+
+import javax.sql.ConnectionEvent;
+import javax.sql.ConnectionEventListener;
+import javax.sql.PooledConnection;
+import javax.sql.StatementEventListener;
 import java.lang.reflect.Constructor;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import javax.sql.ConnectionEvent;
-import javax.sql.ConnectionEventListener;
-import javax.sql.PooledConnection;
-
-import com.mysql.jdbc.ConnectionImpl;
-import com.mysql.jdbc.ExceptionInterceptor;
-import com.mysql.jdbc.SQLError;
-import com.mysql.jdbc.Util;
 
 /**
  * This class is used to wrap and return a physical connection within a logical
@@ -148,7 +147,17 @@ public class MysqlPooledConnection implements PooledConnection {
 		}
 	}
 
-	/**
+  @Override
+  public void addStatementEventListener(StatementEventListener statementEventListener) {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void removeStatementEventListener(StatementEventListener statementEventListener) {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /**
 	 * Invoked by the container. Return a logicalHandle object that wraps a
 	 * physical connection.
 	 * 

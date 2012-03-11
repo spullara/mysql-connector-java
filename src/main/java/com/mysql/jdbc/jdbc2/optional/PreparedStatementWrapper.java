@@ -25,6 +25,9 @@
  */
 package com.mysql.jdbc.jdbc2.optional;
 
+import com.mysql.jdbc.SQLError;
+import com.mysql.jdbc.Util;
+
 import java.io.InputStream;
 import java.io.Reader;
 import java.lang.reflect.Constructor;
@@ -34,18 +37,18 @@ import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Date;
+import java.sql.NClob;
 import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.RowId;
 import java.sql.SQLException;
+import java.sql.SQLXML;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
-
-import com.mysql.jdbc.SQLError;
-import com.mysql.jdbc.Util;
 
 /**
  * Wraps prepared statements so that errors can be reported correctly to
@@ -553,11 +556,61 @@ public class PreparedStatementWrapper extends StatementWrapper implements
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.sql.PreparedStatement#getParameterMetaData()
-	 */
+  @Override
+  public void setAsciiStream(int i, InputStream inputStream, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBinaryStream(int i, InputStream inputStream, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setCharacterStream(int i, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setAsciiStream(int i, InputStream inputStream) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBinaryStream(int i, InputStream inputStream) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setCharacterStream(int i, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNCharacterStream(int i, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClob(int i, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBlob(int i, InputStream inputStream) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNClob(int i, Reader reader) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /*
+    * (non-Javadoc)
+    *
+    * @see java.sql.PreparedStatement#getParameterMetaData()
+    */
 	public ParameterMetaData getParameterMetaData() throws SQLException {
 		try {
 			if (this.wrappedStmt != null) {
@@ -575,11 +628,51 @@ public class PreparedStatementWrapper extends StatementWrapper implements
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.sql.PreparedStatement#setRef(int, java.sql.Ref)
-	 */
+  @Override
+  public void setRowId(int i, RowId rowId) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNString(int i, String s) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNCharacterStream(int i, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNClob(int i, NClob nClob) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setClob(int i, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setBlob(int i, InputStream inputStream, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setNClob(int i, Reader reader, long l) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public void setSQLXML(int i, SQLXML sqlxml) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  /*
+    * (non-Javadoc)
+    *
+    * @see java.sql.PreparedStatement#setRef(int, java.sql.Ref)
+    */
 	public void setRef(int parameterIndex, Ref x) throws SQLException {
 		try {
 			if (this.wrappedStmt != null) {
