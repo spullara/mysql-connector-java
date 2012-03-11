@@ -26,6 +26,21 @@
  */
 package testsuite.regression;
 
+import com.mysql.jdbc.CachedResultSetMetaData;
+import com.mysql.jdbc.Field;
+import com.mysql.jdbc.NonRegisteringDriver;
+import com.mysql.jdbc.ParameterBindings;
+import com.mysql.jdbc.ResultSetInternalMethods;
+import com.mysql.jdbc.SQLError;
+import com.mysql.jdbc.ServerPreparedStatement;
+import com.mysql.jdbc.StatementImpl;
+import com.mysql.jdbc.StatementInterceptor;
+import com.mysql.jdbc.StatementInterceptorV2;
+import com.mysql.jdbc.exceptions.MySQLTimeoutException;
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+import testsuite.BaseTestCase;
+import testsuite.UnreliableSocketFactory;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayReader;
@@ -50,12 +65,15 @@ import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DataTruncation;
 import java.sql.Date;
+import java.sql.NClob;
 import java.sql.PreparedStatement;
 import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
+import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -68,23 +86,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
-
-import testsuite.BaseTestCase;
-import testsuite.UnreliableSocketFactory;
-
-import com.mysql.jdbc.CachedResultSetMetaData;
-import com.mysql.jdbc.Field;
-import com.mysql.jdbc.NonRegisteringDriver;
-import com.mysql.jdbc.ParameterBindings;
-import com.mysql.jdbc.ResultSetInternalMethods;
-import com.mysql.jdbc.SQLError;
-import com.mysql.jdbc.ServerPreparedStatement;
-import com.mysql.jdbc.StatementImpl;
-import com.mysql.jdbc.StatementInterceptor;
-import com.mysql.jdbc.StatementInterceptorV2;
-import com.mysql.jdbc.exceptions.MySQLStatementCancelledException;
-import com.mysql.jdbc.exceptions.MySQLTimeoutException;
-import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
 
 /**
  * Regression tests for the Statement class
@@ -2169,7 +2170,7 @@ public class StatementRegressionTest extends BaseTestCase {
 				multiStmt
 						.execute("SELECT field1 FROM testMultiStatements WHERE field1='abcd';"
 								+ "UPDATE testMultiStatements SET field3=3;"
-								+ "SELECT field3 FROM testMultiStatements WHERE field3=3");
+								+ "SELECT field3 FROM testMultiStatements WHERE field3=3;");
 
 				this.rs = multiStmt.getResultSet();
 
@@ -2537,7 +2538,7 @@ public class StatementRegressionTest extends BaseTestCase {
 		try {
 			pStmt = this.conn
 					.prepareStatement("INSERT INTO testNullClob VALUES (?)");
-			pStmt.setClob(1, null);
+			pStmt.setClob(1, (Reader) null);
 			pStmt.executeUpdate();
 		} finally {
 			if (pStmt != null) {
@@ -3833,7 +3834,7 @@ public class StatementRegressionTest extends BaseTestCase {
 		try {
 			Statement multiStmt = multiConn.createStatement();
 			multiStmt
-					.execute("SELECT 1;SET @a=1; SET @b=2; SET @c=3; INSERT INTO testBug25009 VALUES (1)");
+					.execute("SELECT 1;SET @a=1; SET @b=2; SET @c=3; INSERT INTO testBug25009 VALUES (1);");
 
 			assertEquals(-1, multiStmt.getUpdateCount());
 
@@ -5048,7 +5049,247 @@ public class StatementRegressionTest extends BaseTestCase {
 
 			}
 
-			public void updateAsciiStream(int columnIndex, InputStream x,
+      @Override
+      public RowId getRowId(int i) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public RowId getRowId(String s) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateRowId(int i, RowId rowId) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateRowId(String s, RowId rowId) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public int getHoldability() throws SQLException {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public boolean isClosed() throws SQLException {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNString(int i, String s) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNString(String s, String s1) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNClob(int i, NClob nClob) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNClob(String s, NClob nClob) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public NClob getNClob(int i) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public NClob getNClob(String s) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public SQLXML getSQLXML(int i) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public SQLXML getSQLXML(String s) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateSQLXML(int i, SQLXML sqlxml) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateSQLXML(String s, SQLXML sqlxml) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public String getNString(int i) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public String getNString(String s) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public Reader getNCharacterStream(int i) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public Reader getNCharacterStream(String s) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNCharacterStream(int i, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNCharacterStream(String s, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateAsciiStream(int i, InputStream inputStream, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBinaryStream(int i, InputStream inputStream, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateCharacterStream(int i, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateAsciiStream(String s, InputStream inputStream, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBinaryStream(String s, InputStream inputStream, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateCharacterStream(String s, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBlob(int i, InputStream inputStream, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBlob(String s, InputStream inputStream, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateClob(int i, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateClob(String s, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNClob(int i, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNClob(String s, Reader reader, long l) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNCharacterStream(int i, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNCharacterStream(String s, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateAsciiStream(int i, InputStream inputStream) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBinaryStream(int i, InputStream inputStream) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateCharacterStream(int i, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateAsciiStream(String s, InputStream inputStream) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBinaryStream(String s, InputStream inputStream) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateCharacterStream(String s, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBlob(int i, InputStream inputStream) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateBlob(String s, InputStream inputStream) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateClob(int i, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateClob(String s, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNClob(int i, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public void updateNClob(String s, Reader reader) throws SQLException {
+        //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      public void updateAsciiStream(int columnIndex, InputStream x,
 					int length) throws SQLException {
 
 			}
@@ -5268,7 +5509,17 @@ public class StatementRegressionTest extends BaseTestCase {
 			public int getBytesSize() throws SQLException {
 				return 0;
 			}
-		};
+
+      @Override
+      public <T> T unwrap(Class<T> tClass) throws SQLException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+
+      @Override
+      public boolean isWrapperFor(Class<?> aClass) throws SQLException {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+      }
+    };
 	}
 
 	/**
